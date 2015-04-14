@@ -1,0 +1,948 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1109</width>
+    <height>1021</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Mobility Calculator</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QFrame" name="frame">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Maximum" vsizetype="Minimum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>400</width>
+        <height>400</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>500</width>
+        <height>999999</height>
+       </size>
+      </property>
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Box</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_2" rowstretch="0,0,0,0,0,0,0,0,0">
+       <property name="sizeConstraint">
+        <enum>QLayout::SetMaximumSize</enum>
+       </property>
+       <item row="8" column="1">
+        <widget class="QPushButton" name="pbExit">
+         <property name="text">
+          <string>Exit</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1">
+        <widget class="QPushButton" name="pbSavePltDat">
+         <property name="text">
+          <string>Save Plot Data</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QPushButton" name="pbLoad">
+         <property name="text">
+          <string>Load</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QTableWidget" name="tblHeaderInfo">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>99999</width>
+           <height>200</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="editTriggers">
+          <set>QAbstractItemView::NoEditTriggers</set>
+         </property>
+         <property name="selectionMode">
+          <enum>QAbstractItemView::NoSelection</enum>
+         </property>
+         <attribute name="horizontalHeaderDefaultSectionSize">
+          <number>150</number>
+         </attribute>
+         <attribute name="horizontalHeaderStretchLastSection">
+          <bool>true</bool>
+         </attribute>
+         <attribute name="verticalHeaderVisible">
+          <bool>false</bool>
+         </attribute>
+         <attribute name="verticalHeaderStretchLastSection">
+          <bool>true</bool>
+         </attribute>
+         <row>
+          <property name="text">
+           <string>New Row</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>New Row</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>New Row</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>New Row</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>New Row</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>New Row</string>
+          </property>
+         </row>
+         <column>
+          <property name="text">
+           <string>Parameter</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Value</string>
+          </property>
+         </column>
+         <item row="0" column="0">
+          <property name="text">
+           <string>Initial Delay</string>
+          </property>
+         </item>
+         <item row="0" column="1">
+          <property name="text">
+           <string>Null</string>
+          </property>
+         </item>
+         <item row="1" column="0">
+          <property name="text">
+           <string>Delay After Set</string>
+          </property>
+         </item>
+         <item row="1" column="1">
+          <property name="text">
+           <string>Null</string>
+          </property>
+         </item>
+         <item row="2" column="0">
+          <property name="text">
+           <string>Delay After Read</string>
+          </property>
+         </item>
+         <item row="2" column="1">
+          <property name="text">
+           <string>Null</string>
+          </property>
+         </item>
+         <item row="3" column="0">
+          <property name="text">
+           <string>Num Points</string>
+          </property>
+         </item>
+         <item row="3" column="1">
+          <property name="text">
+           <string>Null</string>
+          </property>
+         </item>
+         <item row="4" column="0">
+          <property name="text">
+           <string>Num Measurements</string>
+          </property>
+         </item>
+         <item row="4" column="1">
+          <property name="text">
+           <string>Null</string>
+          </property>
+         </item>
+         <item row="5" column="0">
+          <property name="text">
+           <string>Num Setpoints</string>
+          </property>
+         </item>
+         <item row="5" column="1">
+          <property name="text">
+           <string>Null</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QTabWidget" name="tabWidget">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="currentIndex">
+          <number>1</number>
+         </property>
+         <widget class="QWidget" name="tabPlt">
+          <attribute name="title">
+           <string>Plot Chooser</string>
+          </attribute>
+          <widget class="QGroupBox" name="groupBox">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>10</y>
+             <width>331</width>
+             <height>101</height>
+            </rect>
+           </property>
+           <property name="title">
+            <string>Axis Settings</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_5">
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_4">
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_3">
+                <item>
+                 <layout class="QVBoxLayout" name="verticalLayout_2">
+                  <item>
+                   <widget class="QLabel" name="lbXAxis">
+                    <property name="text">
+                     <string>XAxis</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QComboBox" name="cbXAxis"/>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QVBoxLayout" name="verticalLayout_3">
+                  <item>
+                   <widget class="QLabel" name="lbYAxis">
+                    <property name="text">
+                     <string>YAxis</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QComboBox" name="cbYAxis"/>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_2">
+              <item>
+               <widget class="QCheckBox" name="ckbRmvFiller">
+                <property name="text">
+                 <string>Remove Filler Points</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="ckbAvgData">
+                <property name="text">
+                 <string>Average Data</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QGroupBox" name="groupBox_2">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>131</y>
+             <width>331</width>
+             <height>71</height>
+            </rect>
+           </property>
+           <property name="title">
+            <string>Plot Settings</string>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_3">
+            <item row="1" column="2">
+             <widget class="QComboBox" name="cbPlotColour">
+              <item>
+               <property name="text">
+                <string>blue</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>green</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>red</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>cyan</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>magenta</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>yellow</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>black</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>white</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QComboBox" name="cbMarkerStyle">
+              <item>
+               <property name="text">
+                <string>.</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>o</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>+</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>,</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>1</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>2</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>3</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>4</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>None</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string>Marker Style</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>Colour</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>Line Style</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QComboBox" name="cbLineStyle">
+              <item>
+               <property name="text">
+                <string>Solid</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Dashes</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Line-Dot</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Dots</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>None</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <zorder>groupBox</zorder>
+          <zorder>tblDeviceInfo</zorder>
+          <zorder>groupBox_2</zorder>
+          <zorder>ckbRmvFiller</zorder>
+         </widget>
+         <widget class="QWidget" name="tabAnalysis">
+          <attribute name="title">
+           <string>Analysis</string>
+          </attribute>
+          <widget class="QGroupBox" name="groupBox_3">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>20</y>
+             <width>331</width>
+             <height>81</height>
+            </rect>
+           </property>
+           <property name="title">
+            <string>Axis Settings</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_6">
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_7">
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_4">
+                <item>
+                 <layout class="QVBoxLayout" name="verticalLayout_8">
+                  <item>
+                   <widget class="QLabel" name="lbXAxis_2">
+                    <property name="text">
+                     <string>XAxis</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QComboBox" name="cbXAxis_2"/>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QVBoxLayout" name="verticalLayout_9">
+                  <item>
+                   <widget class="QLabel" name="lbYAxis_2">
+                    <property name="text">
+                     <string>YAxis</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QComboBox" name="cbAYAxis"/>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+         <widget class="QWidget" name="tabCalcVals">
+          <attribute name="title">
+           <string>Calculated Values</string>
+          </attribute>
+          <widget class="QTableWidget" name="tableWidget">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>371</width>
+             <height>621</height>
+            </rect>
+           </property>
+           <property name="dragDropMode">
+            <enum>QAbstractItemView::NoDragDrop</enum>
+           </property>
+           <property name="alternatingRowColors">
+            <bool>true</bool>
+           </property>
+           <property name="sortingEnabled">
+            <bool>true</bool>
+           </property>
+           <row>
+            <property name="text">
+             <string>Resistivity</string>
+            </property>
+           </row>
+           <row>
+            <property name="text">
+             <string>Threshold Voltage</string>
+            </property>
+           </row>
+           <row>
+            <property name="text">
+             <string>On/Off Ratio</string>
+            </property>
+           </row>
+           <row>
+            <property name="text">
+             <string>Sweep Rate</string>
+            </property>
+           </row>
+           <row>
+            <property name="text">
+             <string>Peak Mobility</string>
+            </property>
+           </row>
+           <row>
+            <property name="text">
+             <string>N</string>
+            </property>
+           </row>
+           <column>
+            <property name="text">
+             <string>Value</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Units</string>
+            </property>
+           </column>
+           <item row="0" column="0">
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="flags">
+             <set>ItemIsSelectable|ItemIsEnabled</set>
+            </property>
+           </item>
+           <item row="0" column="1">
+            <property name="text">
+             <string>ohm*cm</string>
+            </property>
+            <property name="flags">
+             <set>ItemIsSelectable|ItemIsEnabled</set>
+            </property>
+           </item>
+           <item row="1" column="0">
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="flags">
+             <set>ItemIsSelectable|ItemIsEnabled</set>
+            </property>
+           </item>
+           <item row="1" column="1">
+            <property name="text">
+             <string>V</string>
+            </property>
+            <property name="flags">
+             <set>ItemIsSelectable</set>
+            </property>
+           </item>
+           <item row="2" column="0">
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="flags">
+             <set>ItemIsSelectable|ItemIsEnabled</set>
+            </property>
+           </item>
+           <item row="2" column="1">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="flags">
+             <set>ItemIsSelectable|ItemIsEnabled</set>
+            </property>
+           </item>
+           <item row="3" column="0">
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="flags">
+             <set>ItemIsSelectable|ItemIsEnabled</set>
+            </property>
+           </item>
+           <item row="3" column="1">
+            <property name="text">
+             <string>mV/s</string>
+            </property>
+            <property name="flags">
+             <set>ItemIsSelectable|ItemIsEnabled</set>
+            </property>
+           </item>
+           <item row="4" column="0">
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="flags">
+             <set>ItemIsSelectable|ItemIsEnabled</set>
+            </property>
+           </item>
+           <item row="4" column="1">
+            <property name="text">
+             <string>cm^2/Vs</string>
+            </property>
+            <property name="font">
+             <font>
+              <kerning>true</kerning>
+             </font>
+            </property>
+            <property name="flags">
+             <set>ItemIsSelectable|ItemIsEnabled</set>
+            </property>
+           </item>
+           <item row="5" column="0">
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="flags">
+             <set>ItemIsSelectable|ItemIsEnabled</set>
+            </property>
+           </item>
+           <item row="5" column="1">
+            <property name="text">
+             <string>cm^-3</string>
+            </property>
+            <property name="flags">
+             <set>ItemIsSelectable|ItemIsUserCheckable|ItemIsEnabled</set>
+            </property>
+           </item>
+          </widget>
+         </widget>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLabel" name="label">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Device Info</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+         <property name="margin">
+          <number>0</number>
+         </property>
+         <property name="indent">
+          <number>3</number>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLabel" name="label_2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Measurement Info</string>
+         </property>
+         <property name="indent">
+          <number>3</number>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QTableWidget" name="tblDeviceInfo">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>380</width>
+           <height>210</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="editTriggers">
+          <set>QAbstractItemView::NoEditTriggers</set>
+         </property>
+         <property name="alternatingRowColors">
+          <bool>true</bool>
+         </property>
+         <property name="selectionMode">
+          <enum>QAbstractItemView::NoSelection</enum>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
+         <property name="sortingEnabled">
+          <bool>true</bool>
+         </property>
+         <attribute name="horizontalHeaderDefaultSectionSize">
+          <number>150</number>
+         </attribute>
+         <attribute name="horizontalHeaderMinimumSectionSize">
+          <number>50</number>
+         </attribute>
+         <attribute name="horizontalHeaderStretchLastSection">
+          <bool>true</bool>
+         </attribute>
+         <attribute name="verticalHeaderVisible">
+          <bool>false</bool>
+         </attribute>
+         <attribute name="verticalHeaderStretchLastSection">
+          <bool>true</bool>
+         </attribute>
+         <row>
+          <property name="text">
+           <string>New Row</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>New Row</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>New Row</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>New Row</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>New Row</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>New Row</string>
+          </property>
+         </row>
+         <column>
+          <property name="text">
+           <string>Parameter</string>
+          </property>
+          <property name="textAlignment">
+           <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Value</string>
+          </property>
+         </column>
+         <item row="0" column="0">
+          <property name="text">
+           <string>Wafer ID</string>
+          </property>
+         </item>
+         <item row="0" column="1">
+          <property name="text">
+           <string>Null</string>
+          </property>
+         </item>
+         <item row="1" column="0">
+          <property name="text">
+           <string>Nanowire ID</string>
+          </property>
+         </item>
+         <item row="1" column="1">
+          <property name="text">
+           <string>Null</string>
+          </property>
+         </item>
+         <item row="2" column="0">
+          <property name="text">
+           <string>Device ID</string>
+          </property>
+         </item>
+         <item row="2" column="1">
+          <property name="text">
+           <string>Null</string>
+          </property>
+         </item>
+         <item row="3" column="0">
+          <property name="text">
+           <string>Measurement #</string>
+          </property>
+         </item>
+         <item row="3" column="1">
+          <property name="text">
+           <string>Null</string>
+          </property>
+         </item>
+         <item row="4" column="0">
+          <property name="text">
+           <string>Lighting</string>
+          </property>
+         </item>
+         <item row="4" column="1">
+          <property name="text">
+           <string>Null</string>
+          </property>
+         </item>
+         <item row="5" column="0">
+          <property name="text">
+           <string>Test Type</string>
+          </property>
+         </item>
+         <item row="5" column="1">
+          <property name="text">
+           <string>Null</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="MatplotlibWidget" name="mplwidget">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+   <zorder>frame</zorder>
+   <zorder>leStartV</zorder>
+   <zorder>lbStart</zorder>
+   <zorder>lbEnd</zorder>
+   <zorder>leEndV</zorder>
+   <zorder>leNPoints</zorder>
+   <zorder>lbNPoints</zorder>
+   <zorder>lbV1</zorder>
+   <zorder>lbV2</zorder>
+   <zorder>verticalLayoutWidget</zorder>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MatplotlibWidget</class>
+   <extends>QWidget</extends>
+   <header>matplotlibwidget</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>pbExit</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>56</x>
+     <y>418</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>659</x>
+     <y>412</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
