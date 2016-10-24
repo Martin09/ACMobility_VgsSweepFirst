@@ -45,7 +45,7 @@ class dataFile(object):
         
     def load(self,fileName = None):
         if fileName is None:
-            fileName = QtGui.QFileDialog.getOpenFileName(self, 'Choose data file to open', self.fileInfo['Filename'], filter='*.lvm')
+            fileName = QtGui.QFileDialog.getOpenFileName(self, 'Choose data file to open', self.fileInfo['Filename'], filter='Measurement Files (*.dat *.lvm);;All Files (*.*)')
         if fileName:
             self.filename = fileName
             self.parseFilename()
