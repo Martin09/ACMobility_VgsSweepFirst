@@ -26,7 +26,7 @@ import scipy.signal
 # Qt4Agg backend. It also inherits from QWidget
 #from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt4agg import NavigationToolbar2QT as NavigationToolbar
-
+import matplotlib as mpl
 from DataLoader import dataFile
 
 class MyWindow(QtGui.QMainWindow):
@@ -77,7 +77,13 @@ class MyWindow(QtGui.QMainWindow):
         self.mplwidget.myplot = self.mplwidget.figure.add_subplot(111)        
         self.mplwidget.myplot.set_title("Pulse Curve")
         self.mplwidget.myplot.set_xlabel("Pt Index")
-        self.mplwidget.myplot.set_ylabel("Voltage (V)")  
+        self.mplwidget.myplot.set_ylabel("Voltage (V)") 
+        
+        #Configure latex for plotting, from here: stackoverflow.com/questions/22348756/upright-mu-in-plot-label-retaining-original-tick-fonts  
+        mpl.rcParams['mathtext.fontset'] = 'custom'
+        mpl.rcParams['mathtext.rm'] = 'Bitstream Vera Sans'
+        mpl.rcParams['mathtext.it'] = 'Bitstream Vera Sans:italic'
+        mpl.rcParams['mathtext.bf'] = 'Bitstream Vera Sans:bold'
         
         self.pltCfg_RawData = {'marker':'.','linestyle':'-','linecolor':'b','title':'Title','xlabel':'xlabel','ylabel':'ylabel'}        
         self.pltCfg_Analysis = {'marker':'.','linestyle':'-','linecolor':'b','title':'Title','xlabel':'xlabel','ylabel':'ylabel'}                
@@ -86,18 +92,34 @@ class MyWindow(QtGui.QMainWindow):
         self.markerDict = {0:'.',1:'o',2:'+',3:'.',4:'1',5:'2',6:'3',7:'4',8:''}
         self.lineColourDict = {0:'b',1:'g',2:'r',3:'c',4:'m',5:'y',6:'k',7:'w'}
 
-        self.dict_NWLen = {'MF-08-ZA' : {'AD':2.700E-6, 'AB':0.929E-6, 'BC':0.929E-6,'CD':0.929E-6},
+        self.dict_NWLen = {'MF-08-ZA' : {'AD':3.474E-6, 'AB':0.929E-6, 'BC':0.929E-6,'CD':0.929E-6},
                            'MF-07-GA' : {'AD':3.400E-6, 'AB':0.924E-6, 'BC':0.924E-6,'CD':0.924E-6},
                            'MF-06-IA' : {'AD':2.667E-6, 'AB':0.745E-6, 'BC':0.745E-6,'CD':0.745E-6},
                            'MF-05-IA' : {'AD':3.400E-6, 'AB':0.924E-6, 'BC':0.924E-6,'CD':0.924E-6},
                            'MF-04-IA' : {'AD':3.400E-6, 'AB':0.924E-6, 'BC':0.924E-6,'CD':0.924E-6},                                                      
                            'MF-03-IA' : {'AD':2.971E-6, 'AB':None, 'BC':None,'CD':None}}
-        self.dict_NWDiam = {'MF-08-ZA' : 83E-9,  #Zn3As2
+        self.dict_NWDiam = {'MF-08-ZA' : 71E-9,  #Zn3As2
                             'MF-07-GA' : 100E-9, #InAs/GaSb Core-shell
                             'MF-06-IA' : 130E-9, #InAsSb
                             'MF-05-IA' : 100E-9, #InAs 14-04-23B
                             'MF-04-IA' : 100E-9, #InAs 14-04-23B
                             'MF-03-IA' : 100E-9} #InAs 14-04-23B
+                            
+        self.dict_units = {'mobility':'$cm^2/V\cdot s$', #From most specific string first to most general strings at end
+                           'conductance': 'mS',                           
+                           'vg':'V',
+                           'n_':'cm$^{-3}$',                           
+                           'v':'mV',
+                           'i':'$\mu$A',
+                           't':'s'}                     
+        #Must match the dict_units dictionary
+        self.dict_unitsMult = {'mobility':1e4, #From most specific string first to most general strings at end
+                           'conductance': 1e3, 
+                           'vg':1,
+                           'n_':1e-6,                           
+                           'v':1e3,
+                           'i':1e6,
+                           't':1}                                             
         self.show()
         self.updatePlot_RawData() 
 
@@ -171,6 +193,7 @@ class MyWindow(QtGui.QMainWindow):
         nwLen = self.NWLength
         
         Cox = self.calculateOxideCapacitance(er,nwLen,radius,tox)
+        Cox = nwLen*3.46E-11 #TODO: Broaden this to other NW radiuses
         
         Vt = []
         peakMobility = []
@@ -323,7 +346,11 @@ class MyWindow(QtGui.QMainWindow):
         self.mplwidget.figure.canvas.draw()        
         
     def loadDataClickedSlot(self): #Wrapper function since must have compatibility between signal and slot
-        fileName = QtGui.QFileDialog.getOpenFileName(self, 'Choose data file to load', self.dataFile.fileInfo['Filename'], filter='*.dat;;*.lvm;;*.*')
+        if self.dataFile is None:
+            startPath = "."
+        else:
+            startPath = self.dataFile.fileInfo['Filename']
+        fileName = QtGui.QFileDialog.getOpenFileName(self, 'Choose data file to load', startPath, filter='Measurement Files (*.dat *.lvm);;All Files (*.*)')
         if fileName:
             self.loadData(fileName=fileName)
 
@@ -542,8 +569,14 @@ class MyWindow(QtGui.QMainWindow):
         self.mplwidget.myplot.hold(False)             
 
     def updatePlot_Analysis(self,xaxis,yaxis,legend):
+        lblxaxis, multxaxis = self.getAxisLabel(xaxis)
+        lblyaxis, multyaxis = self.getAxisLabel(yaxis)        
+        
+        plotFrame = self.dataFrame.copy()
+        plotFrame[xaxis] = plotFrame[xaxis]*multxaxis
+        plotFrame[yaxis] = plotFrame[yaxis]*multyaxis
         try:
-            plotFrame = pd.pivot_table(self.dataFrame,values=yaxis, index=xaxis, columns=legend)
+            plotFrame = pd.pivot_table(plotFrame,values=yaxis, index=xaxis, columns=legend)
         except:
             return
         #if data set has more legend entries than is allowed
@@ -553,10 +586,18 @@ class MyWindow(QtGui.QMainWindow):
             #Select only this data to then plot            
             plotFrame = plotFrame.iloc[:,legendIndexes]
 
-        self.pltCfg_Analysis['xlabel'] = xaxis
-        self.pltCfg_Analysis['ylabel'] = yaxis      
+        self.pltCfg_Analysis['xlabel'] = lblxaxis
+        self.pltCfg_Analysis['ylabel'] = lblyaxis      
         self.pltCfg_Analysis['title'] = self.dataFile.fileInfo['Wafer']+" "+self.dataFile.fileInfo['Device ID']+" Exp:"+self.dataFile.fileInfo['Measurement']
         self.plotDataFrame(plotFrame,self.pltCfg_Analysis)                          
+        
+    def getAxisLabel(self,axisName):
+        for key in self.dict_units: #Loop over units dictionary
+            if key in axisName.lower(): #Compare entries to current axisName
+                label = '%s (%s)'%(axisName,self.dict_units[key]) #If find a match, get values out and return
+                mult = self.dict_unitsMult[key]
+                return label, mult
+        return axisName, 1
         
     def plotDataFrame(self,dataFrame,pltCfg):
         
@@ -567,8 +608,8 @@ class MyWindow(QtGui.QMainWindow):
         dataFrame.plot(ax=self.mplwidget.myplot)
         self.mplwidget.myplot.plot()
         
-        self.mplwidget.myplot.ticklabel_format(style='sci', axis='y', scilimits=(-2,2))
-        self.mplwidget.myplot.ticklabel_format(style='sci', axis='x', scilimits=(-2,2))  
+        self.mplwidget.myplot.ticklabel_format(style='sci', axis='y', scilimits=(-4,4))
+        self.mplwidget.myplot.ticklabel_format(style='sci', axis='x', scilimits=(-4,4))  
         self.mplwidget.myplot.set_xlabel(pltCfg['xlabel'])
         self.mplwidget.myplot.set_ylabel(pltCfg['ylabel'])
         self.mplwidget.myplot.set_title(pltCfg['title'])        
@@ -585,8 +626,8 @@ class MyWindow(QtGui.QMainWindow):
     def plotData(self,xpoints,ypoints,pltCfg_RawData):
         self.mplwidget.myplot.cla()
         self.mplwidget.myplot.plot(xpoints,ypoints,marker=pltCfg_RawData['marker'],linestyle=pltCfg_RawData['linestyle'], color=pltCfg_RawData['linecolor'])
-        self.mplwidget.myplot.ticklabel_format(style='sci', axis='y', scilimits=(-2,2))
-        self.mplwidget.myplot.ticklabel_format(style='sci', axis='x', scilimits=(-2,2))  
+        self.mplwidget.myplot.ticklabel_format(style='sci', axis='y', scilimits=(-4,4))
+        self.mplwidget.myplot.ticklabel_format(style='sci', axis='x', scilimits=(-4,4))  
         self.mplwidget.myplot.set_xlabel(pltCfg_RawData['xlabel'])
         self.mplwidget.myplot.set_ylabel(pltCfg_RawData['ylabel'])
         self.mplwidget.myplot.set_title(pltCfg_RawData['title'])
@@ -645,15 +686,15 @@ if __name__ == '__main__':
 #    window.loadData("./MF-08-ZA_00-00_84-91-2_dark_MobilityPulsedAC-BC.lvm")
 
 #    window.loadData("./MF-06-IA_04-23B_20-97-1_dark_MobilityPulsedAC-AD.lvm")
-    window.loadData("V:/2015-04-09 - MF-06-IA - Mobility Measurement (Python)/MF-06-IA_00-00_41-27-6_dark_LinearMobilityAD.dat")
+#    window.loadData("V:/2015-04-09 - MF-06-IA - Mobility Measurement (Python)/MF-06-IA_00-00_41-27-6_dark_LinearMobilityAD.dat")
 
 #    testFile = dataFile("D:/Dropbox/LMSC/Programming/ACMobility/MF-04-IA_04-23B_82-26-1_dark_MobilityPulsedAC-AD-VdsFirst.lvm")    
 
 
-    window.tabWidget.setCurrentIndex(1)
-    window.cbAXAxis.setCurrentIndex(0)
-    window.cbAYAxis.setCurrentIndex(4)
-    window.cbAIndex.setCurrentIndex(1)
+#    window.tabWidget.setCurrentIndex(1)
+#    window.cbAXAxis.setCurrentIndex(0)
+#    window.cbAYAxis.setCurrentIndex(4)
+#    window.cbAIndex.setCurrentIndex(1)
 
     # start the Qt main loop execution, exiting from this script
     # with the same return code of Qt application
